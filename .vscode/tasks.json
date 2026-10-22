@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "sandBackupPath",
+      "type": "promptString",
+      "description": "Path to the encrypted Sand profile backup",
+      "default": ".sand-backups/"
+    }
+  ],
+  "tasks": [
+    {
+      "label": "Sand: Back up profile",
+      "type": "process",
+      "command": "npm",
+      "args": ["run", "profile:backup"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Sand: Restore profile",
+      "type": "process",
+      "command": "npm",
+      "args": ["run", "profile:restore", "--", "${input:sandBackupPath}"],
+      "problemMatcher": []
+    }
+  ]
+}

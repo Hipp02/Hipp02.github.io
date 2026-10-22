@@ -1,0 +1,4 @@
+node_modules/
+.sand-credentials.txt
+.sand-backups/
+.sand-desktop/

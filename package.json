@@ -1,0 +1,17 @@
+{
+  "name": "sand-browser",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A lightweight web desktop with sandboxed site viewing",
+  "main": "main.js",
+  "scripts": {
+    "start": "node remote-browser.js",
+    "codespaces:start": "node start-background.js",
+    "profile:backup": "node profile-backup.js backup",
+    "profile:restore": "node profile-backup.js restore",
+    "desktop": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^44.5.1"
+  }
+}

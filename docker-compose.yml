@@ -1,0 +1,38 @@
+services:
+  linux-desktop:
+    build:
+      context: ./linux-desktop
+    image: sand-linux-desktop:local
+    container_name: sand-linux-desktop
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+      TITLE: Sand Linux Desktop
+      SELKIES_FRAMERATE: "30,15-60"
+    expose:
+      - "3000"
+    shm_size: 1gb
+    volumes:
+      - linux-desktop-config:/config
+    restart: unless-stopped
+
+  desktop-proxy:
+    build:
+      context: ./linux-desktop-proxy
+    image: sand-linux-desktop-proxy:local
+    container_name: sand-linux-desktop-proxy
+    environment:
+      CODESPACES: ${CODESPACES:-false}
+      CODESPACE_NAME: ${CODESPACE_NAME:-}
+      GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN: ${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN:-}
+      SAND_PORT: ${SAND_PORT:-3001}
+      DESKTOP_PORT: ${DESKTOP_PORT:-3002}
+    ports:
+      - "127.0.0.1:3010:3002"
+    depends_on:
+      - linux-desktop
+    restart: unless-stopped
+
+volumes:
+  linux-desktop-config:
