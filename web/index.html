@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <title>Sand Linux Desktop</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/desktop.js" defer></script>
+  </head>
+  <body>
+    <main class="desktop" aria-label="Linux desktop">
+      <iframe
+        id="linux-desktop"
+        title="Linux desktop"
+        referrerpolicy="no-referrer"
+        allow="clipboard-read; clipboard-write; fullscreen"
+        allowfullscreen
+      ></iframe>
+      <div class="connection-status" id="connection-status" role="status" aria-live="polite">
+        <p id="status-message">Starting your Linux desktop…</p>
+        <button id="retry" type="button" hidden>Try again</button>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sand Browser</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="renderer.js" defer></script>
+  </head>
+  <body>
+    <header class="browser-chrome">
+      <div class="nav-row">
+        <a class="brand" href="#" aria-label="Sand Browser home">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>sand</span>
+        </a>
+        <div class="nav-controls">
+          <button class="icon-button" id="back" type="button" title="Go back" aria-label="Go back">&#8592;</button>
+          <button class="icon-button" id="forward" type="button" title="Go forward" aria-label="Go forward">&#8594;</button>
+          <button class="icon-button" id="reload" type="button" title="Reload page" aria-label="Reload page">&#8635;</button>
+        </div>
+        <form id="address-form" class="address-form">
+          <span class="connection-mark" id="connection-mark" aria-hidden="true">&#9679;</span>
+          <input id="address" type="text" aria-label="Website address or search" placeholder="Search or enter a website" autocomplete="off" spellcheck="false">
+          <button class="go-button" type="submit">Go</button>
+        </form>
+      </div>
+      <div class="status-row">
+        <span class="status-copy" id="status-copy" aria-live="polite">Private session · data clears when you quit</span>
+        <div class="utility-controls">
+          <button class="utility-button" id="proxy-open" type="button">Proxy</button>
+          <button class="utility-button" id="extensions-open" type="button">Extensions <span class="extension-count" id="extension-count">0</span></button>
+        </div>
+      </div>
+    </header>
+
+    <dialog id="proxy-dialog" class="settings-dialog">
+      <form id="proxy-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">CONNECTION</p>
+            <h1>Proxy server</h1>
+          </div>
+          <button class="close-button" type="button" data-close="proxy-dialog" aria-label="Close">&#215;</button>
+        </div>
+        <label for="proxy-url">Proxy URL</label>
+        <input id="proxy-url" type="url" placeholder="socks5://127.0.0.1:1080" autocomplete="off" spellcheck="false">
+        <p class="dialog-note">Routes browser requests through this proxy. This is not a VPN and may not cover every connection type. Proxy credentials are not supported.</p>
+        <p class="dialog-error" id="proxy-error" role="alert"></p>
+        <div class="dialog-actions">
+          <button class="secondary-button" type="button" id="proxy-direct">Use direct connection</button>
+          <button class="primary-button" type="submit">Apply proxy</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="extensions-dialog" class="settings-dialog">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">ADD-ONS</p>
+          <h1>Extensions</h1>
+        </div>
+        <button class="close-button" type="button" data-close="extensions-dialog" aria-label="Close">&#215;</button>
+      </div>
+      <p class="dialog-note">Load an unpacked Chromium extension folder. Extension support is limited; extensions can read and change pages you visit. Only install code you trust.</p>
+      <ul id="extension-list" class="extension-list"></ul>
+      <p class="dialog-error" id="extension-error" role="alert"></p>
+      <div class="dialog-actions">
+        <span class="extension-footnote">Extensions are removed when Sand closes.</span>
+        <button class="primary-button" id="extension-load" type="button">Load extension</button>
+      </div>
+    </dialog>
+
+    <div id="app-status" class="app-status" role="status" aria-live="polite"></div>
+  </body>
+</html>

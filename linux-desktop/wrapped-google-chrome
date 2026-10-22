@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+
+binary=/usr/bin/google-chrome-stable
+if grep -q 'Seccomp:.0' /proc/1/status; then
+  exec "$binary" --password-store=basic "$@"
+fi
+
+exec "$binary" --password-store=basic --no-sandbox --test-type "$@"

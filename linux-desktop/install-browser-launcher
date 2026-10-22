@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ -x /usr/bin/google-chrome-stable && -f /usr/share/applications/google-chrome.desktop ]]; then
+  launcher=/usr/share/applications/google-chrome.desktop
+  desktop_file=/config/Desktop/google-chrome.desktop
+elif [[ -f /usr/share/applications/chromium.desktop ]]; then
+  launcher=/usr/share/applications/chromium.desktop
+  desktop_file=/config/Desktop/chromium.desktop
+else
+  echo "No installed browser launcher was found." >&2
+  exit 1
+fi
+
+mkdir -p /config/Desktop
+install -o abc -g abc -m 0755 "$launcher" "$desktop_file"

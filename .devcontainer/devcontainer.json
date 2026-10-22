@@ -1,0 +1,17 @@
+{
+  "name": "Sand Desktop",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:0-20-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "forwardPorts": [3001],
+  "portsAttributes": {
+    "3001": {
+      "label": "Sand Desktop",
+      "onAutoForward": "openBrowser",
+      "visibility": "private"
+    }
+  },
+  "postCreateCommand": "npm install",
+  "postStartCommand": "bash -lc 'cd /workspaces/sand && node start-background.js'"
+}
